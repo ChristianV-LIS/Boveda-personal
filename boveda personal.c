@@ -114,6 +114,42 @@ void crear_cuenta() {
 }
 
 /*
+Nombre : iniciar_sesion
+Objetivo: Función para iniciar sesión en el programa.
+Descripción: Es el proceso para leer el archivo con los usuarios y verificar los datos de inicio de sesion.
+*/
+void iniciar_sesion() {
+	char nombre[MAX_NOMBRE], contrasena[MAX_CONS];
+	
+	// Entrada
+	printf("--- Iniciar sesion ---\n");
+	printf("Ingrese su nombre de usuario: ");
+	fgets(nombre, MAX_NOMBRE, stdin);
+	nombre[strcspn(nombre, "\n")] = 0; // Elimina el salto de línea del input
+	
+	printf("Ingrese su contraseña: ");
+	fgets(contrasena, MAX_CONS, stdin);
+	contrasena[strcspn(contrasena, "\n")] = 0; // Elimina el salto de línea del input
+	system("cls");
+	
+	// Proceso
+	if (verificar_usuario(nombre, contrasena)) {
+		// Salida
+		printf("Inicio de sesión exitoso. ¡Bienvenido(a), %s!\n", nombre);
+		printf("Presiona Enter para continuar...");
+		getchar();
+		system("cls");
+		segundo_menu(nombre);
+	} else {
+		// Salida
+		printf("Nombre de usuario o contraseña incorrectos.\n");
+		printf("Presiona Enter para continuar...");
+		getchar();
+		system("cls");
+	}
+}
+
+/*
 Nombre: crear_archivo
 Objetivo: Función para crear un archivo.
 Descripción: Es el proceso para crear un archivo con el nombre que el usuario ingrese.
