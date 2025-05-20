@@ -112,3 +112,38 @@ void crear_cuenta() {
 	getchar();
 	system("cls");
 }
+
+/*
+Nombre: crear_archivo
+Objetivo: Función para crear un archivo.
+Descripción: Es el proceso para crear un archivo con el nombre que el usuario ingrese.
+*/
+void crear_archivo(){
+	char nombre_archivo[100];
+	// Entrada
+	printf("--- Crear archivo ---\n");
+	printf("Ingrese el nombre del archivo(incluir extensión .txt): ");
+	fgets(nombre_archivo, sizeof(nombre_archivo), stdin);
+	nombre_archivo[strcspn(nombre_archivo, "\n")] = '\0';
+	system("cls");
+	
+	//Proceso
+	FILE *archivo = fopen(nombre_archivo, "w");
+	if (archivo != NULL) {
+		//Salida
+		printf("El archivo '%s' se ha creado correctamente.\n", nombre_archivo);
+		printf("Presiona Enter para continuar...");
+		getchar();
+		system("cls");
+		fclose(archivo);
+		escribir_archivo(nombre_archivo);
+	} else {
+		//Salida
+		printf("Ocurrió un error al crear el archivo.\n");
+		printf("Presiona Enter para continuar...");
+		getchar();
+		system("cls");
+	}
+	
+	return;
+}
