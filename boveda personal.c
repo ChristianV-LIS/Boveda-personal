@@ -179,3 +179,38 @@ void descifrar_archivo(){
 	system("cls");
 	return;
 }
+
+/*
+Nombre: aplicar_xor
+Objetivo:Función para realizar el método XOR de archivos txt.
+Descripción:Es el proceso para aplicar XOR.
+*/
+void aplicar_xor (const char *archivo_origen, const char *archivo_cifrado, const char *clave) {
+	FILE *origen = fopen(archivo_origen, "rb");
+	FILE *cifrado = fopen(archivo_cifrado, "wb");
+	// Proceso
+	if  (origen == NULL || cifrado == NULL) {
+		perror("Error al abrir los archivos");
+		printf("Presiona Enter para continuar...");
+		getchar();
+		system("cls");
+		return;
+	}
+	
+	int clave_tamanio = strlen(clave);
+	int contador = 0;
+	char byte;
+	
+	while (fread(&byte, sizeof(byte), 1, origen) == 1) { // Lee un byte del archivo de origen hasta el final del archivo
+		// Cifrado XOR para cualquier carácter ASCII
+		byte ^= clave[contador % clave_tamanio]; // Se realiza el cifrado xor al byte leído, clave[contador % clave_tamaño] selecciona un carácter de clave en ciclos.
+		// Salida
+		fwrite(&byte, sizeof(byte), 1, cifrado); // Se escribe el byte cifrado en el archivo de salida: cifrado
+		contador++;
+	}
+	
+	fclose(origen);
+	fclose(cifrado);
+	
+	return;
+}
