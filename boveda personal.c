@@ -7,21 +7,30 @@
 #define FILE_USUARIOS "file_usuarios.txt"
 /*
 Nombre: boveda personal
-Descripción: Primera versión del programa que incluye las opciones de crear cuenta
-e iniciar sesión.
-Autores: Diego Cerón, Christian Vargas, Guillermo Couoh
+DescripciÃ³n: Primera versiÃ³n del programa que incluye las opciones de crear cuenta
+e iniciar sesiÃ³n.
+Autores: Diego CerÃ³n, Christian Vargas, Guillermo Couoh
 Fecha: 12/05/2025
-Versión: 1.0
+VersiÃ³n: 1.0
 Compilador: ZinjaI
 */
 
 // Funciones
 void crear_cuenta();
+void iniciar_sesion();
+void segundo_menu(const char *nombre);
+void crear_archivo();
+void escribir_archivo(const char *nombre_archivo);
+void cifrar_archivo();
+void descifrar_archivo();
+void aplicar_xor (const char *archivo_origen, const char *archivo_cifrado, const char *clave);
+int usuario_existe(const char *nombre);
+int verificar_usuario(const char *nombre, const char *contrasena);
 
 /*
 Nombre : main
-Objetivo: Función base del programa
-Descripción: Contiene el menú principal del programa.
+Objetivo: FunciÃ³n base del programa
+DescripciÃ³n: Contiene el menÃº principal del programa.
 */
 int main() {
 	int opc;
@@ -29,9 +38,9 @@ int main() {
 	do {
 		printf("--- MENU ---\n");
 		printf("1. Crear cuenta\n");
-		printf("2. Iniciar sesión\n");
+		printf("2. Iniciar sesiÃ³n\n");
 		printf("3. Salir\n");
-		printf("Seleccione una opción: ");
+		printf("Seleccione una opciÃ³n: ");
 		// Entrada
 		scanf("%d", &opc);
 		getchar();
@@ -50,7 +59,7 @@ int main() {
 			printf("Saliendo del programa...\n");
 			break;
 		default:
-			printf("Opción inválida.\n");
+			printf("OpciÃ³n invÃ¡lida.\n");
 		}
 	} while (opc != 3);
 	
@@ -59,8 +68,8 @@ int main() {
 
 /*
 Nombre : crear_cuenta
-Objetivo: Función para crear una cuenta en el programa.
-Descripción: Es el proceso para crear una cuenta y guardar los datos en el archivo de texto.
+Objetivo: FunciÃ³n para crear una cuenta en el programa.
+DescripciÃ³n: Es el proceso para crear una cuenta y guardar los datos en el archivo de texto.
 */
 void crear_cuenta() {
 	char nombre[MAX_NOMBRE], contrasena[MAX_CONS];
@@ -69,7 +78,7 @@ void crear_cuenta() {
 	printf("--- Crear cuenta ---\n");
 	printf("Ingrese un nombre de usuario: ");
 	fgets(nombre, MAX_NOMBRE, stdin);
-	nombre[strcspn(nombre, "\n")] = 0; // Elimina el salto de línea del input
+	nombre[strcspn(nombre, "\n")] = 0; // Elimina el salto de lÃ­nea del input
 	
 	if (usuario_existe(nombre)) {
 		printf("Nombre de usuario existente. Pruebe con otro.\n");
@@ -79,9 +88,9 @@ void crear_cuenta() {
 		return;
 	}
 	
-	printf("Ingrese una contraseña: ");
+	printf("Ingrese una contraseÃ±a: ");
 	fgets(contrasena, MAX_CONS, stdin);
-	contrasena[strcspn(contrasena, "\n")] = 0; // Elimina el salto de línea del input
+	contrasena[strcspn(contrasena, "\n")] = 0; // Elimina el salto de lÃ­nea del input
 	system("cls");
 	
 	// Proceso
