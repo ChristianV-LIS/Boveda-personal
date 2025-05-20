@@ -214,3 +214,33 @@ void aplicar_xor (const char *archivo_origen, const char *archivo_cifrado, const
 	
 	return;
 }
+
+/*
+Nombre : usuario_existe
+Objetivo: Función para verificar que no existe otro usuario con el mismo nombre.
+Descripción: Es el proceso para comparar los nombres en el archivo de texto con la entrada del usuario.
+*/
+int usuario_existe(const char *nombre) {
+	// Proceso
+	FILE *archivo = fopen(FILE_USUARIOS, "r");
+	if (archivo == NULL) {
+		// Salida
+		perror("Error al abrir el archivo");
+		printf("Presiona Enter para continuar...");
+		getchar();
+		system("cls");
+		return 0;
+	}
+	
+	char nombre_archivo[MAX_NOMBRE], contrasena[MAX_CONS];
+	while (fscanf(archivo, "%s %s", nombre_archivo, contrasena) == 2) { // lee y recibe solo dos datos por línea 
+		if (strcmp(nombre_archivo, nombre) == 0) { // Verifica si el nombre de usuario nuevo es el mismo que uno existente
+			// Salida
+			fclose(archivo);
+			return 1; // Existe un usuario con el mismo nombre
+		}
+	}
+	
+	fclose(archivo);
+	return 0; // El nombre de usuario es único
+}
