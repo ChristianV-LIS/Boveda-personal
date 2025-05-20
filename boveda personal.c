@@ -410,3 +410,33 @@ int usuario_existe(const char *nombre) {
 	fclose(archivo);
 	return 0; // El nombre de usuario es único
 }
+
+/*
+Nombre : verificar_usuario
+Objetivo: Función para verificar los datos en el inicio de sesión.
+Descripción: Contiene el proceso para comparar el nombre y contraseña en el archivo de texto con la entrada del usuario.
+*/
+int verificar_usuario(const char *nombre, const char *contrasena) {
+	// Proceso
+	FILE *archivo = fopen(FILE_USUARIOS, "r");
+	if (archivo == NULL) {
+		// Salida
+		perror("Error al abrir el archivo");
+		printf("Presiona Enter para continuar...");
+		getchar();
+		system("cls");
+		return 0;
+	}
+	
+	char nombre_archivo[MAX_NOMBRE], contrasena_archivo[MAX_CONS];
+	while (fscanf(archivo, "%s %s", nombre_archivo, contrasena_archivo) == 2) { // Lee y recibe solo dos datos por línea
+		if (strcmp(nombre_archivo, nombre) == 0 && strcmp(contrasena_archivo, contrasena) == 0) { // Verifica si el nombre y contraseña digitados son iguales al registro
+			// Salida
+			fclose(archivo);
+			return 1; // El nombre y contraseña existen
+		}
+	}
+	
+	fclose(archivo);
+	return 0; // El nombre o contraseña son incorrectos. No existe 
+}
