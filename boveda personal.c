@@ -150,6 +150,55 @@ void iniciar_sesion() {
 }
 
 /*
+Nombre: segundo_menu
+Onjetivo: Función para mostrar el menú al iniciar sesión.
+Descripción: Es el proceso para mostrar el menu de opciones del programa después de iniciar sesión.
+*/
+void segundo_menu(const char *nombre) {
+	int opc2;
+	
+	do {
+		printf("--- MENU ---\n");
+		printf("¡Hola, %s!\n", nombre);
+		printf("1. Crear archivo txt\n");
+		printf("2. Cifrar archivo txt\n");
+		printf("3. Descifrar archivo txt\n");
+		printf("4. Cerrar sesión\n");
+		printf("Seleccione una opción: ");
+		// Entrada
+		scanf("%d", &opc2);
+		getchar();
+		system("cls");
+		
+		// Proceso
+		switch (opc2) {
+		case 1:
+			// Salida
+			crear_archivo();
+			break;
+		case 2:
+			// Salida
+			cifrar_archivo();
+			break;
+		case 3:
+			// Salida
+			descifrar_archivo();
+			break;
+		case 4:
+			// Salida
+			printf("Cerrando sesión...\n");
+			printf("Presiona Enter para continuar...");
+			getchar();
+			system("cls");
+			break;
+		default:
+			printf("Opción inválida.\n");
+		}
+	} while (opc2 != 4);
+
+}
+
+/*
 Nombre: crear_archivo
 Objetivo: Función para crear un archivo.
 Descripción: Es el proceso para crear un archivo con el nombre que el usuario ingrese.
