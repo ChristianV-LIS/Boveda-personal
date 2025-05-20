@@ -278,6 +278,42 @@ void escribir_archivo(const char *nombre_archivo){
 	
 	return;
 }
+
+/*
+Nombre: cifrar_archivo
+Objetivo:Función para el cifrado de archivos txt.
+Descripción:Es el proceso para aplicar el cifrado XOR en un archivo origen a uno nuevo.
+*/
+void cifrar_archivo(){
+	char archivo_origen[100], archivo_cifrado[100], clave[50];
+	printf("--- Cifrar archivo ---\n");
+	printf("Ingrese el nombre del archivo original a cifrar: ");
+	fgets(archivo_origen, sizeof(archivo_origen), stdin);
+	archivo_origen[strcspn(archivo_origen, "\n")] = '\0'; // Elimina el salto de línea
+	
+	printf("Ingrese el nombre del nuevo archivo cifrado: ");
+	fgets(archivo_cifrado, sizeof(archivo_cifrado), stdin);
+	archivo_cifrado[strcspn(archivo_cifrado, "\n")] = '\0'; // Elimina el salto de línea
+	
+	printf("\n--- Importante ---\n");
+	printf("Guarda la clave, sin ella no podrás descifrar el archivo y se perderá la información\n");
+	printf("Ingrese su clave de cifrado: ");
+	fgets(clave, sizeof(clave), stdin);
+	clave[strcspn(clave, "\n")] = '\0'; // Elimina el salto de línea
+	
+	printf("Presiona Enter para continuar...");
+	getchar();
+	system("cls");
+	
+	aplicar_xor(archivo_origen, archivo_cifrado, clave);
+	printf("Archivo cifrado correctamente: %s\n", archivo_cifrado);
+	printf("Presiona Enter para continuar...");
+	getchar();
+	system("cls");
+	
+	return;
+}
+
 /*
 Nombre: descifrar_archivo
 Objetivo:Función para el descifrado de archivos txt.
