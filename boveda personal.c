@@ -147,3 +147,35 @@ void crear_archivo(){
 	
 	return;
 }
+
+/*
+Nombre: descifrar_archivo
+Objetivo:Función para el descifrado de archivos txt.
+Descripción:Es el proceso para aplicar el descifrado XOR en un archivo origen a uno nuevo.
+*/
+void descifrar_archivo(){
+	char archivo_origen[100], archivo_cifrado[100], clave[50];
+	printf("--- Descifrar archivo ---\n");
+	printf("Ingrese el nombre del archivo a descifrar: ");
+	fgets(archivo_origen, sizeof(archivo_origen), stdin);
+	archivo_origen[strcspn(archivo_origen, "\n")] = '\0'; // Elimina el salto de línea
+	
+	printf("Ingrese el nombre del nuevo archivo descifrado: ");
+	fgets(archivo_cifrado, sizeof(archivo_cifrado), stdin);
+	archivo_cifrado[strcspn(archivo_cifrado, "\n")] = '\0'; // Elimina el salto de línea
+	
+	printf("Ingrese la clave de cifrado: ");
+	fgets(clave, sizeof(clave), stdin);
+	clave[strcspn(clave, "\n")] = '\0'; // Elimina el salto de línea
+	
+	printf("Presiona Enter para continuar...");
+	getchar();
+	system("cls");
+	
+	aplicar_xor(archivo_origen, archivo_cifrado, clave);
+	printf("Archivo descifrado correctamente: %s\n", archivo_cifrado);
+	printf("Presiona Enter para continuar...");
+	getchar();
+	system("cls");
+	return;
+}
